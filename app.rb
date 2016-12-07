@@ -10,6 +10,7 @@ ActiveRecord::Base.establish_connection(
 )
 
 class Employee < ActiveRecord::Base
+  has_many :courses
   self.primary_key = :id
 
   def monthly_salary
@@ -80,6 +81,8 @@ end
 
 class Course < ActiveRecord::Base
   self.primary_key = :id
+
+  belongs_to :employee
 end
 
 after do
@@ -111,15 +114,17 @@ end
 
 get '/edit_course' do
   @course = Course.find(params["id"])
+  @employees = Employee.all
 
   erb :edit_course
 end
 
 post '/update_course' do
   course = Course.find(params["id"])
+
   course.update_attributes(params)
 
-  redirect to ('/courses')
+  redirect to("/courses")
 end
 
 get '/search_course' do
@@ -130,7 +135,7 @@ end
 
 get '/delete_course' do
   @course = Course.find(params["id"])
-  Course.delete_course
+  course.delete
 
   redirect to ('/courses')
 end
