@@ -71,7 +71,7 @@
           <label for="employee_id">Teacher</label>
           <select name="employee_id">
             <% @employees.each do |employee| %>
-            <option value="<%= employee.id %>" <%= (employee. == @course.employee) ? "selected" : "" %> ><%= employee.name %></option>
+            <option value="<%= employee.id %>" <%= (employee == @course.employee) ? "selected" : "" %> ><%= employee.name %></option>
             <% end %>
           </select>
         </div>

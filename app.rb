@@ -134,7 +134,7 @@ get '/search_course' do
 end
 
 get '/delete_course' do
-  @course = Course.find(params["id"])
+  course = Course.find(params["id"])
   course.delete
 
   redirect to ('/courses')
